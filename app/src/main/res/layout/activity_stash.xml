@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".StashActivity">
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_round_close_16"
+        android:background="@drawable/ic_bg_circle_24dp"
+        android:padding="8dp"
+        android:contentDescription="@string/close"
+        android:layout_margin="16dp" />
+
+    <ImageView
+        android:id="@+id/ivHelp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/question_mark_30"
+        android:background="@drawable/ic_bg_circle_24dp"
+        android:tint="?colorControlNormal"
+        android:padding="8dp"
+        android:contentDescription="@string/help"
+        android:layout_margin="16dp" />
+
+    <dev.jishin.android.credstack.custom.StackLayout
+        android:id="@+id/stackLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@id/btnAction"
+        app:layout_constraintTop_toBottomOf="@id/ivClose">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </dev.jishin.android.credstack.custom.StackLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corners_top"
+        android:fontFamily="@font/montserrat"
+        android:paddingVertical="12dp"
+        android:text="@string/proceed_to_emi_selection"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/colorAccent"
+        android:textColor="@color/pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stackLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
