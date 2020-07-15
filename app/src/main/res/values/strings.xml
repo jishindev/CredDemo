@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">CredStack</string>
+    <string name="app_name">CRED</string>
     <string name="close">Close</string>
     <string name="help">Help</string>
     <string name="proceed_to_emi_selection">Proceed to EMI selection</string>
+    <string name="template_credit_amount_title">%1$s, how much do you need?</string>
+    <string name="template_credit_amount_subtitle">move the dial and set any amount you need upto ₹ %1$s</string>
+    <string name="credit_amount">credit amount</string>
 </resources>

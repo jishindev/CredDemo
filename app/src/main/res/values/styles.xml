@@ -6,11 +6,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSurface">@color/colorPrimary</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
 
-        <item name="fontFamily"></item>
+        <item name="fontFamily">@font/montserrat</item>
     </style>
 
+
+    <style name="roundedSquareImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
 </resources>
