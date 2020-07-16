@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layoutDescription="@xml/activity_stash_motion_scene"
     tools:context=".StashActivity">
 
     <ImageView
@@ -35,13 +36,62 @@
         android:contentDescription="@string/help"
         android:layout_margin="16dp" />
 
-    <dev.jishin.android.credstack.custom.views.StackLayout
-        android:id="@+id/stackLayout"
+    <include
+        android:id="@+id/collapsedCreditAmount"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        layout="@layout/collapsed_credit_amount"
         android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="invisible"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/ivHelp" />
+
+    <include
+        android:id="@+id/expandedCreditAmount"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        layout="@layout/expanded_credit_amount"
+        tools:visibility="invisible"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHelp" />
+
+    <include
+        android:id="@+id/collapsedEmiPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/collapsed_emi_plan"
+        tools:visibility="invisible"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount" />
+
+    <include
+        android:id="@+id/expandedEmiPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/expanded_emi_plan"
+        android:visibility="invisible"
+        tools:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collapsedEmiPlan" />
+
+    <include
+        android:id="@+id/expandedPaymentBank"
+        layout="@layout/expanded_payment_bank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/btnAction"
-        app:layout_constraintTop_toBottomOf="@id/ivClose" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collapsedEmiPlan"
+        tools:visibility="invisible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAction"
@@ -56,7 +106,6 @@
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stackLayout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

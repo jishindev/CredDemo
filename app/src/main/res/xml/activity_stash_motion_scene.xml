@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/setCreditAmount">
+        <Constraint
+            android:id="@+id/collapsedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/expandedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/collapsedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedPaymentBank"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/btnAction"
+            app:layout_constraintTop_toBottomOf="@id/collapsedEmiPlan"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/setEmiPlan">
+        <Constraint
+            android:id="@+id/collapsedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/expandedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/collapsedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedPaymentBank"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/btnAction"
+            app:layout_constraintTop_toBottomOf="@id/collapsedEmiPlan"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/setPaymentBank">
+        <Constraint
+            android:id="@+id/collapsedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/expandedCreditAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/ivHelp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp" />
+        <Constraint
+            android:id="@+id/collapsedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedEmiPlan"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/collapsedCreditAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/expandedPaymentBank"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/btnAction"
+            app:layout_constraintTop_toBottomOf="@id/collapsedEmiPlan"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/setEmiPlan"
+        app:constraintSetStart="@id/setCreditAmount"
+        app:duration="300">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@+id/collapsedCreditAmount" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/setPaymentBank"
+        app:constraintSetStart="@id/setEmiPlan"
+        app:duration="300">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@+id/collapsedCreditAmount" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/setEmiPlan"
+        app:constraintSetStart="@id/setCreditAmount"
+        app:duration="300">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@+id/collapsedCreditAmount" />
+    </Transition>
+</MotionScene>
