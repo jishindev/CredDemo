@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +20,7 @@
         android:background="@drawable/ic_bg_circle_24dp"
         android:padding="8dp"
         android:contentDescription="@string/close"
-        android:layout_margin="16dp" />
+        android:layout_margin="24dp" />
 
     <ImageView
         android:id="@+id/ivHelp"
@@ -34,7 +35,7 @@
         android:tint="?colorControlNormal"
         android:padding="8dp"
         android:contentDescription="@string/help"
-        android:layout_margin="16dp" />
+        android:layout_margin="24dp" />
 
     <include
         android:id="@+id/collapsedCreditAmount"
@@ -50,7 +51,7 @@
 
     <include
         android:id="@+id/expandedCreditAmount"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/expanded_credit_amount"
         tools:visibility="invisible"
@@ -102,6 +103,8 @@
         android:paddingVertical="12dp"
         android:text="@string/proceed_to_emi_selection"
         android:textAllCaps="false"
+        app:elevation="36dp"
+        android:elevation="36dp"
         android:textColor="@color/pink"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
