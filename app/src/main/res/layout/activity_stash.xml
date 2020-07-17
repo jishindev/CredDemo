@@ -39,9 +39,39 @@
         android:id="@+id/stackLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toTopOf="@id/btnAction"
-        app:layout_constraintTop_toBottomOf="@id/ivClose" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivClose">
+
+        <dev.jishin.android.credstack.custom.views.StackItem
+            android:id="@+id/siCreditAmount"
+            style="@style/TopRoundedCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bgColor="#111922"
+            app:collapsedLayoutId="@layout/collapsed_credit_amount"
+            app:expandedLayoutId="@layout/expanded_credit_amount" />
+
+        <dev.jishin.android.credstack.custom.views.StackItem
+            android:id="@+id/siEmiPlan"
+            style="@style/TopRoundedCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bgColor="#17212c"
+            app:collapsedLayoutId="@layout/collapsed_emi_plan"
+            app:expandedLayoutId="@layout/expanded_emi_plan" />
+
+        <dev.jishin.android.credstack.custom.views.StackItem
+            android:id="@+id/siPaymentBank"
+            style="@style/TopRoundedCardStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bgColor="#1d2731"
+            app:expandedLayoutId="@layout/expanded_payment_bank" />
+
+    </dev.jishin.android.credstack.custom.views.StackLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAction"
