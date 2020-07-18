@@ -4,13 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.PopupMenu
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_stash.*
 
 class StashActivity : AppCompatActivity() {
-
-    private val stashVM by viewModels<StashVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +18,11 @@ class StashActivity : AppCompatActivity() {
 
     private fun initViews() {
 
+        // Update views(buttons etc.) when the stack updates
         stackLayout.observeStackChange {
             updateActionButton(it)
         }
 
-        // Click handling
         btnAction.setOnClickListener { stackLayout.gotoNext() }
 
         ivClose.setOnClickListener {
@@ -40,7 +37,6 @@ class StashActivity : AppCompatActivity() {
                 show()
             }
         }
-
         ivHelp.setOnClickListener {
             with(PopupMenu(this, ivHelp)) {
                 menuInflater.inflate(R.menu.help, menu)
@@ -73,6 +69,7 @@ class StashActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+        // delegate to stackLayout
         if (!stackLayout.gotoPrevious())
             super.onBackPressed()
     }

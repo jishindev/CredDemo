@@ -19,20 +19,23 @@ class StackView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : MaterialCardView(context, attrs, defStyle) {
 
+    // custom attributes
     private var expandedView: View? = null
     private var collapsedView: View? = null
     private var bgColor = 0
     private var isExpanded: Boolean = false
+
     private var onCollapsedClickListener: () -> Unit = {}
 
+    // expand/collapse a StackView
     fun setIsExpanded(value: Boolean) {
         isExpanded = value
-
-        // invalidate()
         updateStackState()
     }
 
     init {
+
+        // initialize custom attributes from style/attrs
         context.obtainStyledAttributes(
             attrs, R.styleable.StackView, defStyle, 0
         ).use { typedArray ->
@@ -58,6 +61,7 @@ class StackView @JvmOverloads constructor(
         invalidate()
     }
 
+    // rebuild the StackView
     override fun invalidate() {
 
         removeAllViews()
@@ -72,7 +76,6 @@ class StackView @JvmOverloads constructor(
         }
 
         updateStackState()
-
         setCardBackgroundColor(bgColor)
 
         super.invalidate()
@@ -80,6 +83,7 @@ class StackView @JvmOverloads constructor(
 
     private fun updateStackState() {
 
+        // fade collapsed/expanded view in/out when StackView is expanded/collapsed
         collapsedView?.animate()?.alpha(if (isExpanded) 0f else 1f)
             ?.setDuration(if (isExpanded) animDuration / 2 else animDuration * 2)?.start()
 

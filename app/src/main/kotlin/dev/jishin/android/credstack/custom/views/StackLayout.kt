@@ -30,6 +30,8 @@ class StackLayout @JvmOverloads constructor(
         super.onLayout(changed, left, top, right, bottom)
 
         var topMargin = top
+
+        // layout the children one by one using topMargin
         for (i in 0 until childCount) {
 
             val stackView = getChildAt(i) as? StackView ?: throw IllegalArgumentException(
@@ -43,6 +45,8 @@ class StackLayout @JvmOverloads constructor(
 
                 layout(left, topMargin, right, bottom)
                 topMargin += getCollapsedBottom()
+
+                // to be used later in handling click events
                 tag = i
                 toggleVisibility(i <= currentStackViewPos)
                 onCollapsedClick {
@@ -54,27 +58,32 @@ class StackLayout @JvmOverloads constructor(
         }
     }
 
+    // resets back to top StackView
     fun reset() {
         val oldPos = currentStackViewPos
         currentStackViewPos = 0
         refreshStack(oldPos)
     }
 
+    // takes to next StackView if available
     fun gotoNext() =
         if (currentStackViewPos < childCount - 1) {
             refreshStack(currentStackViewPos++)
             true
         } else false
 
+    // takes to the previous StackView if available
     fun gotoPrevious() =
         if (currentStackViewPos > 0) {
             refreshStack(currentStackViewPos--)
             true
         } else false
 
+    // updates the state of the StackLayout and animates StackViews into place
     private fun refreshStack(oldCurrentStackViewPos: Int) {
         if (oldCurrentStackViewPos == currentStackViewPos) return
         stackViews.forEach { item ->
+
             val pos = (item.tag as Int)
             val show = pos <= currentStackViewPos
             val isCurrentStackView = pos == currentStackViewPos
@@ -87,6 +96,7 @@ class StackLayout @JvmOverloads constructor(
 
                 if (isCurrentStackView) {
                     if (isGoingToNext) {
+                        // animate next StackView up by `bottom`
                         item.translationY = bottom.toFloat()
                         item.alpha = 0.5f
                         item.animate()
@@ -100,6 +110,7 @@ class StackLayout @JvmOverloads constructor(
                 item.setIsExpanded(isCurrentStackView)
             } else {
                 if (isOldStackView) {
+                    // animate previous StackView down by `bottom`
                     item.alpha = 1f
                     item.animate()
                         .alpha(0.5f)
