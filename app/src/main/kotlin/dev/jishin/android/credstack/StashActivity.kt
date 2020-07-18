@@ -22,7 +22,7 @@ class StashActivity : AppCompatActivity() {
     private fun initViews() {
 
         stackLayout.observeStackChange {
-            updateActionButton()
+            updateActionButton(it)
         }
 
         // Click handling
@@ -33,7 +33,7 @@ class StashActivity : AppCompatActivity() {
                 menuInflater.inflate(R.menu.reset, menu)
                 setOnMenuItemClickListener {
                     if (it.itemId == R.id.actionReset) {
-                        //motionLayout.transitionToState(R.id.setCreditAmount)
+                        stackLayout.reset()
                     }
                     return@setOnMenuItemClickListener true
                 }
@@ -61,9 +61,9 @@ class StashActivity : AppCompatActivity() {
     }
 
     // Updates button text based on the current state
-    private fun updateActionButton() {
+    private fun updateActionButton(currentStackPos: Int) {
         btnAction.text = getString(
-            when (stackLayout.currentStackItemPos) {
+            when (currentStackPos) {
                 0 -> R.string.proceed_to_emi_selection
                 1 -> R.string.select_bank_account
                 else -> R.string.tap_for_1_click_kyc
@@ -73,9 +73,7 @@ class StashActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        if (stackLayout.gotoPrevious())
-            updateActionButton()
-        else
+        if (!stackLayout.gotoPrevious())
             super.onBackPressed()
     }
 

@@ -1,10 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#1e2632"
-    style="@style/TopRoundedCardStyle"
-    xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,5 +32,4 @@
         android:layout_marginTop="24dp"
         android:src="@drawable/credit_amount" />
 
-</androidx.constraintlayout.widget.ConstraintLayout><!--
-</com.google.android.material.card.MaterialCardView>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

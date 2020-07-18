@@ -1,12 +1,12 @@
 package dev.jishin.android.credstack
 
-import android.content.Context
-import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.content.res.getResourceIdOrThrow
-import androidx.core.content.res.use
+
+
+val View.animDuration: Long
+    get() = resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+
 
 fun MotionLayout.onTransition(action: (currentId: Int) -> Unit) {
     addTransitionListener(object : MotionLayout.TransitionListener {

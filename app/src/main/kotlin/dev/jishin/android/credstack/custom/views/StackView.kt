@@ -10,10 +10,10 @@ import androidx.core.content.res.getResourceIdOrThrow
 import androidx.core.content.res.use
 import com.google.android.material.card.MaterialCardView
 import dev.jishin.android.credstack.R
-import dev.jishin.android.credstack.toggleVisibility
+import dev.jishin.android.credstack.animDuration
 
 
-class StackItem @JvmOverloads constructor(
+class StackView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -23,18 +23,18 @@ class StackItem @JvmOverloads constructor(
     private var collapsedView: View? = null
     private var bgColor = 0
     private var isExpanded: Boolean = false
+    private var onCollapsedClickListener: () -> Unit = {}
 
-    fun setIsExpanded(value: Boolean, invalidate: Boolean = true) {
+    fun setIsExpanded(value: Boolean) {
         isExpanded = value
 
-        //if (value) expand() else collapse()
-        ///* GlobalScope.launch(Dispatchers.Main) { delay(1000);*/ invalidate() /*}*/
-        invalidate()
+        // invalidate()
+        updateStackState()
     }
 
     init {
         context.obtainStyledAttributes(
-            attrs, R.styleable.StackItem, defStyle, 0
+            attrs, R.styleable.StackView, defStyle, 0
         ).use { typedArray ->
 
             fun Context.inflateFromAttr(styleableResId: Int): View? =
@@ -45,30 +45,17 @@ class StackItem @JvmOverloads constructor(
                 }.getOrNull()
 
             // get custom attributes
-            expandedView = context.inflateFromAttr(R.styleable.StackItem_expandedLayoutId)
-            collapsedView = context.inflateFromAttr(R.styleable.StackItem_collapsedLayoutId)
+            expandedView = context.inflateFromAttr(R.styleable.StackView_expandedLayoutId)
+            collapsedView = context.inflateFromAttr(R.styleable.StackView_collapsedLayoutId)
+            isExpanded = typedArray.getBoolean(R.styleable.StackView_isExpanded, false)
             bgColor =
                 typedArray.getColor(
-                    R.styleable.StackItem_bgColor,
-                    Color.BLUE /*for Debug*/
+                    R.styleable.StackView_bgColor,
+                    Color.BLUE /*for debug*/
                 )
         }
 
         invalidate()
-    }
-
-    private fun expand() {
-        collapsedView?.animate()?.alpha(0f)?.scaleYBy(2f)?.setDuration(200)
-            ?.withEndAction { collapsedView?.toggleVisibility(false) }?.start()
-        expandedView?.animate()?.alpha(1f)?.translationYBy(2f)?.setDuration(200)
-            ?.withEndAction { expandedView?.toggleVisibility(true) }?.start()
-    }
-
-    private fun collapse() {
-        collapsedView?.animate()?.alpha(1f)?.scaleYBy(1f)?.setDuration(200)
-            ?.withEndAction { collapsedView?.toggleVisibility(true) }?.start()
-        expandedView?.animate()?.alpha(1f)?.translationYBy(-2f)?.setDuration(200)
-            ?.withEndAction { expandedView?.toggleVisibility(false) }?.start()
     }
 
     override fun invalidate() {
@@ -78,20 +65,33 @@ class StackItem @JvmOverloads constructor(
         // add views
         collapsedView?.let {
             addView(it, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
-            it.toggleVisibility(show = isExpanded.not())
-            it.setOnClickListener { performClick() }
+            it.setOnClickListener { onCollapsedClickListener() }
         }
         expandedView?.let {
             addView(it)
-            it.toggleVisibility(show = isExpanded)
         }
+
+        updateStackState()
 
         setCardBackgroundColor(bgColor)
 
         super.invalidate()
     }
 
+    private fun updateStackState() {
+
+        collapsedView?.animate()?.alpha(if (isExpanded) 0f else 1f)
+            ?.setDuration(if (isExpanded) animDuration / 2 else animDuration * 2)?.start()
+
+        expandedView?.animate()?.alpha(if (isExpanded) 1f else 0f)
+            ?.setDuration(if (isExpanded) animDuration * 2 else animDuration / 2)?.start()
+
+    }
+
     fun getCollapsedBottom() =
         collapsedView?.bottom ?: 0
 
+    fun onCollapsedClick(onClick: () -> Unit) {
+        onCollapsedClickListener = onClick
+    }
 }

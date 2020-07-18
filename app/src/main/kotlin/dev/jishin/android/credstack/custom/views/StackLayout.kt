@@ -2,7 +2,9 @@ package dev.jishin.android.credstack.custom.views
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
+import dev.jishin.android.credstack.animDuration
 import dev.jishin.android.credstack.toggleVisibility
 
 class StackLayout @JvmOverloads constructor(
@@ -11,8 +13,10 @@ class StackLayout @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var onStackChange: () -> Unit = {}
-    var currentStackItemPos = 0
+    private val stackViews = arrayListOf<StackView>()
+    private var onStackChange: (Int) -> Unit = {}
+    var currentStackViewPos = 0
+
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -27,45 +31,94 @@ class StackLayout @JvmOverloads constructor(
 
         var topMargin = top
         for (i in 0 until childCount) {
-            val stackItem = getChildAt(i) as? StackItem
-            stackItem?.run {
-                layout(left, topMargin, right, bottom)
 
-                toggleVisibility(i <= currentStackItemPos)
-                setIsExpanded(i == currentStackItemPos, false)
+            val stackView = getChildAt(i) as? StackView ?: throw IllegalArgumentException(
+                "StackLayout allows only child views of type StackView. " +
+                        "${getChildAt(i).javaClass.simpleName} is not allowed here."
+            )
+
+            with(stackView) {
+
+                stackViews.add(this)
+
+                layout(left, topMargin, right, bottom)
                 topMargin += getCollapsedBottom()
                 tag = i
-                if (i != currentStackItemPos)
-                    setOnClickListener {
-                        // expand this stackItem
-                        currentStackItemPos = it.tag as Int
-                        invalidate()
-                    }
+                toggleVisibility(i <= currentStackViewPos)
+                onCollapsedClick {
+                    val oldCurrentStackViewPos = currentStackViewPos
+                    currentStackViewPos = tag as Int
+                    refreshStack(oldCurrentStackViewPos)
+                }
             }
         }
     }
 
-    fun gotoNext(): Boolean {
-        if (currentStackItemPos < childCount - 1) {
-            currentStackItemPos++
-            invalidate()
-            onStackChange()
-            return true
-        }
-        return false
+    fun reset() {
+        val oldPos = currentStackViewPos
+        currentStackViewPos = 0
+        refreshStack(oldPos)
     }
 
-    fun gotoPrevious(): Boolean {
-        if (currentStackItemPos > 0) {
-            currentStackItemPos--
-            invalidate()
-            onStackChange()
-            return true
+    fun gotoNext() =
+        if (currentStackViewPos < childCount - 1) {
+            refreshStack(currentStackViewPos++)
+            true
+        } else false
+
+    fun gotoPrevious() =
+        if (currentStackViewPos > 0) {
+            refreshStack(currentStackViewPos--)
+            true
+        } else false
+
+    private fun refreshStack(oldCurrentStackViewPos: Int) {
+        if (oldCurrentStackViewPos == currentStackViewPos) return
+        stackViews.forEach { item ->
+            val pos = (item.tag as Int)
+            val show = pos <= currentStackViewPos
+            val isCurrentStackView = pos == currentStackViewPos
+            val isOldStackView = pos == oldCurrentStackViewPos
+            val isGoingToNext = oldCurrentStackViewPos <= currentStackViewPos
+
+
+            if (show) {
+                item.toggleVisibility(true)
+
+                if (isCurrentStackView) {
+                    if (isGoingToNext) {
+                        item.translationY = bottom.toFloat()
+                        item.alpha = 0.5f
+                        item.animate()
+                            .alpha(1f)
+                            .setInterpolator(AccelerateDecelerateInterpolator())
+                            .setDuration(animDuration)
+                            .translationYBy(-bottom.toFloat())
+                            .start()
+                    }
+                }
+                item.setIsExpanded(isCurrentStackView)
+            } else {
+                if (isOldStackView) {
+                    item.alpha = 1f
+                    item.animate()
+                        .alpha(0.5f)
+                        .setInterpolator(AccelerateDecelerateInterpolator())
+                        .setDuration(animDuration)
+                        .translationYBy(bottom.toFloat())
+                        .withEndAction { item.toggleVisibility(false) }
+                        .start()
+                } else {
+                    item.toggleVisibility(false)
+                }
+            }
         }
-        return false
+        onStackChange(currentStackViewPos)
     }
 
-    fun observeStackChange(observer: () -> Unit) {
+    fun observeStackChange(observer: (Int) -> Unit) {
         onStackChange = observer
     }
+
+
 }

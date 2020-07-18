@@ -1,15 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><!--<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/TopRoundedCardStyle.Clickable"
-    android:layout_marginBottom="24dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
-    android:alpha="0.8"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -43,5 +36,4 @@
         app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
         app:layout_constraintTop_toTopOf="@id/tvTitle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout><!--
-</com.google.android.material.card.MaterialCardView>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
