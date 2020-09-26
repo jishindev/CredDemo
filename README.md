@@ -1,3 +1,3 @@
 # CredDemo
 
-![](cred_demo.gif)
+![](cred_demo_resized.gif)
